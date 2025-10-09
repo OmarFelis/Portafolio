@@ -4,9 +4,9 @@ import './App.css'
 function App() {
   const [currentImage, setCurrentImage] = useState(0)
   const images = [
-    "https://via.placeholder.com/300x300/667eea/ffffff?text=Omar",
-    "https://via.placeholder.com/300x300/764ba2/ffffff?text=Perfil", 
-    "https://via.placeholder.com/300x300/667eea/ffffff?text=CV"
+    "/sss.PNG",
+    "/img2.png",
+    "/imgxcv.jpg"
   ]
 
   useEffect(() => {
@@ -144,7 +144,7 @@ function App() {
                   <span>MongoDB</span>
                 </div>
                 <div className="skill-icon-item">
-                  <img src="https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2019/01/11/documentdb.png" alt="DocumentDB" />
+                  <img src="https://icon.icepanel.io/AWS/svg/Database/DocumentDB.svg" alt="DocumentDB" />
                   <span>DocumentDB</span>
                 </div>
               </div>
@@ -158,17 +158,21 @@ function App() {
                   <span>AWS</span>
                 </div>
                 <div className="skill-icon-item">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/AWS_Simple_Icons_AWS_Lambda.svg" alt="Lambda" />
+                  <img src="https://icon.icepanel.io/AWS/svg/Compute/Lambda.svg" alt="Lambda" />
                   <span>Lambda</span>
                 </div>
                 <div className="skill-icon-item">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Amazon-EC2.svg" alt="EC2" />
+                  <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" alt="EC2" />
                   <span>EC2</span>
                 </div>
                 <div className="skill-icon-item">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/AmazonWebservices_Logo.svg" alt="SQS/SNS" />
+                  <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" alt="SQS/SNS" />
                   <span>SQS/SNS</span>
                 </div>
+                  <div className="skill-icon-item">
+                      <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" alt="AWS S3" />
+                      <span>AWS S3</span>
+                  </div>
               </div>
             </div>
             
