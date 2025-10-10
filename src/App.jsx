@@ -279,7 +279,7 @@ function App() {
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'CCNAv7: Switching, Routing and Wireless Essentials',
-                      image: 'public/ciscoswitch.PNG',
+                      image: '/ciscoswitch.PNG',
                       issuer: 'Cisco Networking Academy - 2024'
                     })}
                   >
@@ -299,7 +299,7 @@ function App() {
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Junior Cybersecurity Analyst Career Path',
-                      image: 'public/ciscosecurity.PNG',
+                      image: '/ciscosecurity.PNG',
                       issuer: 'Cisco Networking Academy - 2024'
                     })}
                   >
@@ -319,7 +319,7 @@ function App() {
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Jira Fundamentals Badge',
-                      image: 'public/jirabdg.png',
+                      image: '/jirabdg.png',
                       issuer: 'Atlassian University - 2024'
                     })}
                   >
@@ -339,7 +339,7 @@ function App() {
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Procesamiento de Imágenes con Python - MediaPipe',
-                      image: 'public/chiptec.PNG',
+                      image: '/chiptec.PNG',
                       issuer: 'CHIPTEC - 2025'
                     })}
                   >
@@ -359,7 +359,7 @@ function App() {
                       className="view-cert-btn"
                       onClick={() => openModal({
                         title: 'Idioma Inglés - B1',
-                        image: 'public/ingles.PNG',
+                        image: '/ingles.PNG',
                         issuer: 'UPN - 2025'
                       })}
                   >
