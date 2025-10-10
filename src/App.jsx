@@ -3,6 +3,8 @@ import './App.css'
 
 function App() {
   const [currentImage, setCurrentImage] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedCert, setSelectedCert] = useState(null)
   const images = [
     "/sss.PNG",
     "/img2.png",
@@ -15,6 +17,26 @@ function App() {
     }, 3000)
     return () => clearInterval(interval)
   }, [])
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
+  const openModal = (cert) => {
+    setSelectedCert(cert)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+    setSelectedCert(null)
+  }
   return (
     <div className="portfolio">
       {/* Header */}
@@ -52,8 +74,8 @@ function App() {
                   Especializado en pagos digitales, desarrollo web y tecnologías cloud. Practicante en Alignet S.A.C.
                 </p>
                 <div className="hero-buttons">
-                  <a href="#experiencia" className="btn">Ver Experiencia</a>
-                  <a href="#contacto" className="btn btn-outline">Contacto</a>
+                  <button onClick={() => scrollToSection('experiencia')} className="btn">Ver Experiencia</button>
+                  <button onClick={() => scrollToSection('contacto')} className="btn btn-outline">Contacto</button>
                 </div>
               </div>
             </div>
@@ -215,13 +237,27 @@ function App() {
           <h2>Experiencia Laboral</h2>
           <div className="timeline">
             <div className="card experience-card">
-              <h3>Practicante de Integraciones</h3>
+              <div className="experience-header">
+                <div className="experience-title">
+                  <h3>Practicante de Integraciones</h3>
+                </div>
+                <div className="company-logo">
+                  <img src="https://pasarelasdepagos.s3.amazonaws.com/wp-content/uploads/2023/11/Alignet-1.jpg" alt="Alignet Logo" />
+                </div>
+              </div>
               <p className="company">Alignet S.A.C.</p>
               <p className="period">2025 - Actualidad</p>
               <p>Desarrollo de integraciones en el sector de pagos digitales, enfocado en transacciones Card Not Present y entornos eCommerce.</p>
             </div>
             <div className="card experience-card">
-              <h3>Pasante</h3>
+              <div className="experience-header">
+                <div className="experience-title">
+                  <h3>Pasante</h3>
+                </div>
+                <div className="company-logo">
+                  <img src="https://pasarelasdepagos.s3.amazonaws.com/wp-content/uploads/2023/11/Alignet-1.jpg" alt="Alignet Logo" />
+                </div>
+              </div>
               <p className="company">Alignet S.A.C. - Unidad de Negocio de Autenticación</p>
               <p className="period">Agosto 2024 - Noviembre 2024 (320 horas)</p>
               <p>Participación en proyectos de autenticación y seguridad en pagos digitales.</p>
@@ -237,9 +273,18 @@ function App() {
           <div className="certificates-grid">
             <div className="certificate-item">
               <div className="cert-preview">
-                <img src="https://via.placeholder.com/300x200/667eea/ffffff?text=CCNA+Certificate" alt="CCNA Certificate" />
+                <img src="https://images.credly.com/size/680x680/images/f4ccdba9-dd65-4349-baad-8f05df116443/CCNASRWE__1_.png" alt="CCNA Certificate" />
                 <div className="cert-overlay">
-                  <button className="view-cert-btn">Ver Certificado</button>
+                  <button 
+                    className="view-cert-btn"
+                    onClick={() => openModal({
+                      title: 'CCNAv7: Switching, Routing and Wireless Essentials',
+                      image: 'public/ciscoswitch.PNG',
+                      issuer: 'Cisco Networking Academy - 2024'
+                    })}
+                  >
+                    Ver Certificado
+                  </button>
                 </div>
               </div>
               <h3>CCNAv7: Switching, Routing and Wireless Essentials</h3>
@@ -248,9 +293,18 @@ function App() {
             
             <div className="certificate-item">
               <div className="cert-preview">
-                <img src="https://via.placeholder.com/300x200/764ba2/ffffff?text=Cybersecurity+Badge" alt="Cybersecurity Badge" />
+                <img src="https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/e141b254-6fe2-43f4-a63c-1e0ba3d854f2.png" alt="Cybersecurity Badge" />
                 <div className="cert-overlay">
-                  <button className="view-cert-btn">Ver Certificado</button>
+                  <button 
+                    className="view-cert-btn"
+                    onClick={() => openModal({
+                      title: 'Junior Cybersecurity Analyst Career Path',
+                      image: 'public/ciscosecurity.PNG',
+                      issuer: 'Cisco Networking Academy - 2024'
+                    })}
+                  >
+                    Ver Certificado
+                  </button>
                 </div>
               </div>
               <h3>Junior Cybersecurity Analyst Career Path</h3>
@@ -259,9 +313,18 @@ function App() {
             
             <div className="certificate-item">
               <div className="cert-preview">
-                <img src="https://via.placeholder.com/300x200/667eea/ffffff?text=JIRA+Badge" alt="JIRA Badge" />
+                <img src="https://cdn.exceedlms.com/uploads/certifications/badges/28613/original/uni-credential-emblem-jirafundamentals.png?1624917008&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4uZXhjZWVkbG1zLmNvbS91cGxvYWRzL2NlcnRpZmljYXRpb25zL2JhZGdlcy8yODYxMy9vcmlnaW5hbC91bmktY3JlZGVudGlhbC1lbWJsZW0tamlyYWZ1bmRhbWVudGFscy5wbmc~MTYyNDkxNzAwOCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2MDExODc5NX19fV19&Signature=W2GBB0mEo8SN1JCvYtbkKPMKGpo15L7pQ9Awz8o4r0e2ddLPEFU8ePcyQGDSlz8AKoER3qLP7CO~boGDTpQp0NI2T6XkcdgAhxUz98-GapZE1YB5CCOmshc2I27mBYJFIX6On3NqTtxDlppbvO0R3lyPab0LJqhFlD~ZsA-SQ32GG1hvhMpNC8LpGcXvnGf95k0yjL1WtybOiWqmXeLU4vcTyLc8mU6kHFnGnajF8LCaPw6YFh-mx9SbcSlG6N6EpeUiI98acepvT45M5wU3tx3Yd~OsHo7wmmvJK7EnLwLlv2dfQEIKTF8dAxKL3mI7IoXqhz56DxbzXqNTxSKcBw__&Key-Pair-Id=APKAJINUZDMKZJI5I6DA" alt="JIRA Badge" />
                 <div className="cert-overlay">
-                  <button className="view-cert-btn">Ver Certificado</button>
+                  <button 
+                    className="view-cert-btn"
+                    onClick={() => openModal({
+                      title: 'Jira Fundamentals Badge',
+                      image: 'public/jirabdg.png',
+                      issuer: 'Atlassian University - 2024'
+                    })}
+                  >
+                    Ver Certificado
+                  </button>
                 </div>
               </div>
               <h3>Jira Fundamentals Badge</h3>
@@ -270,13 +333,42 @@ function App() {
             
             <div className="certificate-item">
               <div className="cert-preview">
-                <img src="https://via.placeholder.com/300x200/764ba2/ffffff?text=Python+MediaPipe" alt="Python MediaPipe" />
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python MediaPipe" />
                 <div className="cert-overlay">
-                  <button className="view-cert-btn">Ver Certificado</button>
+                  <button 
+                    className="view-cert-btn"
+                    onClick={() => openModal({
+                      title: 'Procesamiento de Imágenes con Python - MediaPipe',
+                      image: 'public/chiptec.PNG',
+                      issuer: 'CHIPTEC - 2025'
+                    })}
+                  >
+                    Ver Certificado
+                  </button>
                 </div>
               </div>
               <h3>Procesamiento de Imágenes con Python - MediaPipe</h3>
               <p>CHIPTEC - 2025</p>
+            </div>
+
+            <div className="certificate-item">
+              <div className="cert-preview">
+                <img src="https://www.upn.edu.pe/sites/default/files/logo-upn-nuevo.svg" alt="Ingles B1" />
+                <div className="cert-overlay">
+                  <button
+                      className="view-cert-btn"
+                      onClick={() => openModal({
+                        title: 'Idioma Inglés - B1',
+                        image: 'public/ingles.PNG',
+                        issuer: 'UPN - 2025'
+                      })}
+                  >
+                    Ver Certificado
+                  </button>
+                </div>
+              </div>
+              <h3>Dominio del idioma Inglés - B1</h3>
+              <p>UPN - 2025</p>
             </div>
           </div>
         </div>
@@ -288,29 +380,28 @@ function App() {
           <h2>Proyectos</h2>
           <div className="grid grid-2">
             <div className="card project-card">
-              <h3>Sistemas de Pagos Digitales</h3>
-              <p>Desarrollo de integraciones para transacciones Card Not Present en entornos eCommerce</p>
+              <h3>Detección de productos con vision computacional</h3>
+              <p>Detección de productos de un supermercado con visión computacional - YOLOv8.</p>
               <div className="project-tech">
-                <span>C#</span>
-                <span>Java</span>
-                <span>REST API</span>
-                <span>AWS</span>
+                <span>Python</span>
+                <span>Yolov8</span>
+                <span>Machine Learning</span>
               </div>
               <div className="project-links">
-                <a href="https://github.com/OmarFelis" className="btn">GitHub</a>
+                <a href="https://github.com/OmarFelis/TesisOmarIASupermercado" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
             </div>
             <div className="card project-card">
-              <h3>Proyectos Electrónicos Agrícolas</h3>
-              <p>Desarrollo de regaderas automáticas y robots asistentes para agricultores</p>
+              <h3>Proyectos transformador de archivos de liquidación BBVA to BCP</h3>
+              <p>Web para transformar archivos de liquidacion del BBVA para realizar pagos masivos a BCP</p>
               <div className="project-tech">
                 <span>Python</span>
-                <span>JavaScript</span>
-                <span>IoT</span>
-                <span>Electrónica</span>
+                <span>Flask</span>
+                <span>Desarrollo Web</span>
+                <span>Visual Basic</span>
               </div>
               <div className="project-links">
-                <a href="https://github.com/OmarFelis" className="btn">GitHub</a>
+                <a href="https://github.com/OmarFelis/archivo_liq_bbvtobcp" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
             </div>
           </div>
@@ -321,16 +412,33 @@ function App() {
       <section id="contacto" className="section contact-section">
         <div className="container">
           <h2>Contacto</h2>
+          <h3>936156493</h3>
           <div className="contact-content">
             <p>¿Interesado en trabajar juntos? ¡Hablemos!</p>
             <div className="contact-links">
               <a href="mailto:omardcardenas99@gmail.com" className="btn">Enviar Email</a>
-              <a href="https://www.linkedin.com/in/omarcardenas03/" className="btn btn-outline">LinkedIn</a>
-              <a href="https://github.com/OmarFelis" className="btn btn-outline">GitHub</a>
+              <a href="https://www.linkedin.com/in/omarcardenas03/" className="btn btn-outline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://github.com/OmarFelis" className="btn btn-outline" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Modal para certificados */}
+      {modalOpen && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>&times;</button>
+            <div className="modal-header">
+              <h3>{selectedCert?.title}</h3>
+              <p>{selectedCert?.issuer}</p>
+            </div>
+            <div className="modal-body">
+              <img src={selectedCert?.image} alt={selectedCert?.title} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
