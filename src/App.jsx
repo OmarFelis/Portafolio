@@ -55,6 +55,10 @@ function App() {
     [
       "/proyecto1.PNG",
       "/proyecto2.jpg"
+    ],
+    [
+      "/PRY2.PNG",
+      "/PRY3.PNG"
     ]
   ]
 
@@ -116,7 +120,7 @@ function App() {
             <div className="hero-right">
               <div className="hero-content">
                 <h1>Omar Cárdenas Ayala</h1>
-                <p className="hero-subtitle">Estudiante de Ingeniería de Sistemas Computacionales</p>
+                <p className="hero-subtitle">Estudiante en Ingeniería de Sistemas Computacionales</p>
                 <p className="hero-description">
                   Especializado en pagos digitales, desarrollo web y tecnologías cloud. Practicante en Alignet S.A.C.
                 </p>
@@ -466,10 +470,26 @@ function App() {
                 </div>
               </div>
             </div>
+            <div className="card project-card">
+              <ProjectCarousel images={imagenesPry[2]} />
+              <div className="project-info">
+                <h3>Tienda Virtual - GiampierShop (En Producción)</h3>
+                <p>Plataforma web virtual para vender ropa de baños y bikinis</p>
+                <div className="project-tech">
+                  <span>HTML</span>
+                  <span>CSS</span>
+                  <span>Desarrollo Web</span>
+                  <span>Python</span>
+                  <span>MYSQL</span>
+                </div>
+                <div className="project-links">
+                  <a href="https://giampiershop.shop/index.html" className="btn" target="_blank" rel="noopener noreferrer">Ver Página</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
 
       {/* Contacto */}
       <section id="contacto" className="section contact-section">
