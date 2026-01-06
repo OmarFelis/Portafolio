@@ -1,14 +1,61 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
+const ProjectCarousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+  }
+
+  return (
+    <div className="project-carousel">
+      <div className="carousel-slide" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        {images.map((img, index) => (
+          <img key={index} src={img} alt={`Project Preview ${index + 1}`} />
+        ))}
+      </div>
+      {images.length > 1 && (
+        <>
+          <button className="carousel-btn prev" onClick={prevSlide}>&#10094;</button>
+          <button className="carousel-btn next" onClick={nextSlide}>&#10095;</button>
+          <div className="carousel-indicators">
+            {images.map((_, index) => (
+              <span
+                key={index}
+                className={`indicator ${currentIndex === index ? 'active' : ''}`}
+                onClick={() => setCurrentIndex(index)}
+              ></span>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
 function App() {
   const [currentImage, setCurrentImage] = useState(0)
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedCert, setSelectedCert] = useState(null)
   const images = [
-    "/sss.PNG",
     "/img2.png",
-    "/imgxcv.jpg"
+    "/imgxcv.jpeg",
+    "/IMG_8165.jpg"
+  ]
+  const imagenesPry = [
+    [
+      "/pry1.jpg",
+      "/dig2.PNG",
+    ],
+    [
+      "/proyecto1.PNG",
+      "/proyecto2.jpg"
+    ]
   ]
 
   useEffect(() => {
@@ -21,7 +68,7 @@ function App() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ 
+      element.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       })
@@ -47,17 +94,17 @@ function App() {
               <div className="image-carousel">
                 <div className="carousel-container">
                   {images.map((img, index) => (
-                    <img 
+                    <img
                       key={index}
-                      src={img} 
-                      alt={`Omar Cárdenas ${index + 1}`} 
-                      className={`profile-image ${currentImage === index ? 'active' : ''}`} 
+                      src={img}
+                      alt={`Omar Cárdenas ${index + 1}`}
+                      className={`profile-image ${currentImage === index ? 'active' : ''}`}
                     />
                   ))}
                 </div>
                 <div className="carousel-dots">
                   {images.map((_, index) => (
-                    <span 
+                    <span
                       key={index}
                       className={`dot ${currentImage === index ? 'active' : ''}`}
                       onClick={() => setCurrentImage(index)}
@@ -96,10 +143,19 @@ function App() {
               <p>
                 El desarrollo de mis habilidades profesionales es motivo para seguir creciendo en mi formación y en el avance de mis capacidades laborales.
               </p>
+              <p style={{ marginTop: '15px' }}>
+                Curriculum Vitae
+              </p>
+              <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                <a href="/CV - OMAR CARDENAS.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                  Ver CV
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Habilidades */}
       <section id="habilidades" className="section skills-section">
@@ -107,7 +163,7 @@ function App() {
           <h2>Habilidades Técnicas</h2>
           <div className="skills-container">
             <div className="skill-category">
-              <h3>💻 Lenguajes de Programación</h3>
+              <h3>Lenguajes de Programación</h3>
               <div className="skill-icons">
                 <div className="skill-icon-item">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" />
@@ -127,9 +183,9 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             <div className="skill-category">
-              <h3>🌐 Desarrollo Web</h3>
+              <h3>Desarrollo Web</h3>
               <div className="skill-icons">
                 <div className="skill-icon-item">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
@@ -149,9 +205,9 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             <div className="skill-category">
-              <h3>🗄️ Bases de Datos</h3>
+              <h3>Bases de Datos</h3>
               <div className="skill-icons">
                 <div className="skill-icon-item">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="SQL Server" />
@@ -171,9 +227,9 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             <div className="skill-category">
-              <h3>☁️ AWS Cloud</h3>
+              <h3>AWS Cloud</h3>
               <div className="skill-icons">
                 <div className="skill-icon-item">
                   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" />
@@ -191,18 +247,18 @@ function App() {
                   <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" alt="SQS/SNS" />
                   <span>SQS/SNS</span>
                 </div>
-                  <div className="skill-icon-item">
-                      <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" alt="AWS S3" />
-                      <span>AWS S3</span>
-                  </div>
+                <div className="skill-icon-item">
+                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" alt="AWS S3" />
+                  <span>AWS S3</span>
+                </div>
               </div>
             </div>
-            
+
             <div className="skill-category">
-              <h3>🔧 Herramientas & Metodologías</h3>
+              <h3>Herramientas & Metodologías</h3>
               <div className="skill-icons">
                 <div className="skill-icon-item">
-                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" alt="JIRA" />
+                  <img src="/jira-1.svg" alt="JIRA" />
                   <span>JIRA</span>
                 </div>
                 <div className="skill-icon-item">
@@ -275,7 +331,7 @@ function App() {
               <div className="cert-preview">
                 <img src="https://images.credly.com/size/680x680/images/f4ccdba9-dd65-4349-baad-8f05df116443/CCNASRWE__1_.png" alt="CCNA Certificate" />
                 <div className="cert-overlay">
-                  <button 
+                  <button
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'CCNAv7: Switching, Routing and Wireless Essentials',
@@ -290,12 +346,12 @@ function App() {
               <h3>CCNAv7: Switching, Routing and Wireless Essentials</h3>
               <p>Cisco Networking Academy - 2024</p>
             </div>
-            
+
             <div className="certificate-item">
               <div className="cert-preview">
                 <img src="https://www.netacad.com/p/ff9e491c-49be-4734-803e-a79e6e83dab1/badges/badge-images/e141b254-6fe2-43f4-a63c-1e0ba3d854f2.png" alt="Cybersecurity Badge" />
                 <div className="cert-overlay">
-                  <button 
+                  <button
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Junior Cybersecurity Analyst Career Path',
@@ -310,12 +366,12 @@ function App() {
               <h3>Junior Cybersecurity Analyst Career Path</h3>
               <p>Cisco Networking Academy - 2024</p>
             </div>
-            
+
             <div className="certificate-item">
               <div className="cert-preview">
-                <img src="https://cdn.exceedlms.com/uploads/certifications/badges/28613/original/uni-credential-emblem-jirafundamentals.png?1624917008&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4uZXhjZWVkbG1zLmNvbS91cGxvYWRzL2NlcnRpZmljYXRpb25zL2JhZGdlcy8yODYxMy9vcmlnaW5hbC91bmktY3JlZGVudGlhbC1lbWJsZW0tamlyYWZ1bmRhbWVudGFscy5wbmc~MTYyNDkxNzAwOCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc2MDExODc5NX19fV19&Signature=W2GBB0mEo8SN1JCvYtbkKPMKGpo15L7pQ9Awz8o4r0e2ddLPEFU8ePcyQGDSlz8AKoER3qLP7CO~boGDTpQp0NI2T6XkcdgAhxUz98-GapZE1YB5CCOmshc2I27mBYJFIX6On3NqTtxDlppbvO0R3lyPab0LJqhFlD~ZsA-SQ32GG1hvhMpNC8LpGcXvnGf95k0yjL1WtybOiWqmXeLU4vcTyLc8mU6kHFnGnajF8LCaPw6YFh-mx9SbcSlG6N6EpeUiI98acepvT45M5wU3tx3Yd~OsHo7wmmvJK7EnLwLlv2dfQEIKTF8dAxKL3mI7IoXqhz56DxbzXqNTxSKcBw__&Key-Pair-Id=APKAJINUZDMKZJI5I6DA" alt="JIRA Badge" />
+                <img src="https://cdn.worldvectorlogo.com/logos/jira-1.svg" alt="JIRA Badge" />
                 <div className="cert-overlay">
-                  <button 
+                  <button
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Jira Fundamentals Badge',
@@ -330,12 +386,12 @@ function App() {
               <h3>Jira Fundamentals Badge</h3>
               <p>Atlassian University - 2024</p>
             </div>
-            
+
             <div className="certificate-item">
               <div className="cert-preview">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python MediaPipe" />
                 <div className="cert-overlay">
-                  <button 
+                  <button
                     className="view-cert-btn"
                     onClick={() => openModal({
                       title: 'Procesamiento de Imágenes con Python - MediaPipe',
@@ -356,12 +412,12 @@ function App() {
                 <img src="https://www.upn.edu.pe/sites/default/files/logo-upn-nuevo.svg" alt="Ingles B1" />
                 <div className="cert-overlay">
                   <button
-                      className="view-cert-btn"
-                      onClick={() => openModal({
-                        title: 'Idioma Inglés - B1',
-                        image: '/ingles.PNG',
-                        issuer: 'UPN - 2025'
-                      })}
+                    className="view-cert-btn"
+                    onClick={() => openModal({
+                      title: 'Idioma Inglés - B1',
+                      image: '/ingles.PNG',
+                      issuer: 'UPN - 2025'
+                    })}
                   >
                     Ver Certificado
                   </button>
@@ -380,33 +436,40 @@ function App() {
           <h2>Proyectos</h2>
           <div className="grid grid-2">
             <div className="card project-card">
-              <h3>Detección de productos con vision computacional</h3>
-              <p>Detección de productos de un supermercado con visión computacional - YOLOv8.</p>
-              <div className="project-tech">
-                <span>Python</span>
-                <span>Yolov8</span>
-                <span>Machine Learning</span>
-              </div>
-              <div className="project-links">
-                <a href="https://github.com/OmarFelis/TesisOmarIASupermercado" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <ProjectCarousel images={imagenesPry[0]} />
+              <div className="project-info">
+                <h3>Detección de productos con vision computacional</h3>
+                <p>Detección de productos de un supermercado con visión computacional - YOLOv8.</p>
+                <div className="project-tech">
+                  <span>Python</span>
+                  <span>Yolov8</span>
+                  <span>Machine Learning</span>
+                </div>
+                <div className="project-links">
+                  <a href="https://github.com/OmarFelis/TesisOmarIASupermercado" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
               </div>
             </div>
             <div className="card project-card">
-              <h3>Proyectos transformador de archivos de liquidación BBVA to BCP</h3>
-              <p>Web para transformar archivos de liquidacion del BBVA para realizar pagos masivos a BCP</p>
-              <div className="project-tech">
-                <span>Python</span>
-                <span>Flask</span>
-                <span>Desarrollo Web</span>
-                <span>Visual Basic</span>
-              </div>
-              <div className="project-links">
-                <a href="https://github.com/OmarFelis/archivo_liq_bbvtobcp" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <ProjectCarousel images={imagenesPry[1]} />
+              <div className="project-info">
+                <h3>Proyectos transformador de archivos de liquidación BBVA to BCP</h3>
+                <p>Web para transformar archivos de liquidacion del BBVA para realizar pagos masivos a BCP</p>
+                <div className="project-tech">
+                  <span>Python</span>
+                  <span>Flask</span>
+                  <span>Desarrollo Web</span>
+                  <span>Visual Basic</span>
+                </div>
+                <div className="project-links">
+                  <a href="https://github.com/OmarFelis/archivo_liq_bbvtobcp" className="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Contacto */}
       <section id="contacto" className="section contact-section">
